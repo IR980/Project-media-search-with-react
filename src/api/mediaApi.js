@@ -5,7 +5,7 @@ const pexel = import.meta.env.VITE_PEXELS_KEY;
 const giphy = import.meta.env.VITE_GIPHY_KEY;
 
 // Unsplash
-export async function fetchPhoto(query, page = 1, per_page = 20) {
+export async function fetchPhoto(query, page = 1, per_page = 30) {
   const response = await axios.get(
     "https://api.unsplash.com/search/photos",
     {
@@ -24,7 +24,7 @@ export async function fetchPhoto(query, page = 1, per_page = 20) {
 }
 
 // Pexels Videos
-export async function fetchVidios(query, per_page = 14) {
+export async function fetchVidios(query, per_page = 40) {
   const res = await axios.get(
     "https://api.pexels.com/v1/videos/search",
     {
@@ -42,7 +42,7 @@ export async function fetchVidios(query, per_page = 14) {
 }
 
 // Giphy GIFs
-export async function fetchGifs(query, per_page = 14) {
+export async function fetchGifs(query, per_page = 20) {
   const res = await axios.get(
     "https://api.giphy.com/v1/gifs/search",
     {

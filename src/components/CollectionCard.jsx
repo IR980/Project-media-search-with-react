@@ -1,21 +1,18 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addCollection, addedToast } from "../redux/features/collectionSlice";
-const ResultCard = ({ item }) => {
-  const dispatch = useDispatch()
+import { removeCollection } from "../redux/features/collectionSlice";
+import {errorToast} from '../redux/features/collectionSlice'
+const CollectionCard = ({item}) => {
+    const dispatch = useDispatch()
 
-  const addToCollection = (item)=>{
-    // console.log(item)
-    // const oldData = JSON.parse(localStorage.getItem('collection')) || []
-    // const newData = [...oldData,item]
-    // localStorage.setItem('collection',JSON.stringify(newData)
-    dispatch(addCollection(item))
-    dispatch(addedToast())
-  }
+    const removeCollectionItem = (item) =>{
+        dispatch(removeCollection(item.id))
+        dispatch(errorToast())
+    }
   return (
     <div className="group relative h-80 w-full overflow-hidden rounded-xl bg-gray-200 shadow-lg transition duration-300 hover:scale-[1.02]">
       {/* Media */}
-      <a target='_blank' href= {item.url} >
+      <a target="_blank" href={item.url}>
         {item.type === "photo" && (
           <img
             className="h-full w-full object-cover"
@@ -49,14 +46,19 @@ const ResultCard = ({ item }) => {
         <p className="line-clamp-2 text-sm font-medium text-white">
           {item.title || "Untitled"}
         </p>
-        <button 
-          onClick={()=>{
-            addToCollection(item)
+        <button
+          onClick={() => {
+            // addToCollection(item);
+            removeCollectionItem(item)
+            
           }}
-          className="bg-blue-800 px-4 py-1 cursor-pointer rounded-xl text-sm active:scale-95">save</button>
+          className="bg-blue-800 px-4 py-1 cursor-pointer rounded-xl text-sm active:scale-95"
+        >
+          Removed
+        </button>
       </div>
     </div>
   );
 };
 
-export default ResultCard;
+export default CollectionCard;
